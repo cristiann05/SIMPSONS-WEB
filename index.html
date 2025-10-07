@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: rgba(162, 198, 255, 0.5);
+            color: #000;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 30px;
+            background-color: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(7px);
+            -webkit-backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgb(138, 133, 133);
+        }
+
+        .nav-logo img {
+            margin-left: 10px;
+            transition: transform 0.3s ease-in;
+        }
+
+        .nav-logo img:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+
+        a {
+            text-decoration: none;
+            transition: transform 0.2s ease-in;
+
+        }
+
+        a:hover {
+            transform: scale(1.05);
+            text-shadow: 2px 2px 6px cadetblue;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .filtros {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        #inputText,
+        #inputSubmit {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        #result {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .cards {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .cards:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 20px cadetblue;
+
+        }
+
+        .cards:hover img {
+            transform: rotate(-5deg);
+            box-shadow: 0 10px 20px cadetblue;
+
+        }
+
+        .cards img {
+            width: 120px;
+            height: auto;
+            margin: 0 auto 10px;
+            border-radius: 8px;
+            background-color: cadetblue;
+            transition: transform 0.2s ease-in-out;
+
+        }
+
+        .cards h2 {
+            margin: 10px 0 5px;
+            font-size: 18px;
+            color: #222;
+        }
+
+        .cards p {
+            margin: 4px 0;
+            font-size: 14px;
+            color: #504b4b;
+        }
+
+        .cards p.frase {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: #8d8080;
+        }
+
+        .age {
+            background-color: rgb(28, 136, 139);
+            border-radius: 10px;
+            width: 30%;
+            padding: 3px;
+            font-weight: bold;
+            transition: 0.3s ease-in;
+            cursor: pointer;
+        }
+
+        .age:hover {
+            transform: scale(1.03);
+        }
+
+        .vivo {
+            background-color: rgb(8, 172, 17);
+            border-radius: 10px;
+            width: 30%;
+            padding: 3px;
+            font-weight: bold;
+            transition: 0.3s ease-in;
+            cursor: pointer;
+        }
+
+        .vivo:hover {
+            transform: scale(1.03);
+        }
+
+        .muerto {
+            background-color: #fa1515;
+            border-radius: 10px;
+            width: 30%;
+            padding: 3px;
+            font-weight: bold;
+            transition: 0.3s ease-in;
+            cursor: pointer;
+        }
+
+        .muerto:hover {
+            transform: scale(1.03);
+        }
+
+
+        .desconocido {
+            background-color: rgb(169, 173, 169);
+            border-radius: 10px;
+            width: 30%;
+            padding: 3px;
+            font-weight: bold;
+            transition: 0.3s ease-in;
+            cursor: pointer;
+        }
+
+        .desconocido:hover {
+            transform: scale(1.03);
+        }
+
+        .box {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 1024px) {
+            #result {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            #result {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            #result {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: center;
+                align-items: center;
+                gap: 20px;
+            }
+
+            a {
+                border: 1px solid black;
+                padding: 10px;
+                border-radius: 10px;
+            }
+
+            a:hover {
+                text-shadow: none;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .nav-links {
+                display: flex;
+                flex-direction: column;
+            }
+
+            a:hover {
+                text-shadow: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="nav-logo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/The_Simpsons_yellow_logo.svg/1280px-The_Simpsons_yellow_logo.svg.png"
+                alt="Logo" width="100">
+        </div>
+        <div class="nav-links">
+            <a href="characters.html">Personajes</a>
+            <a href="Episodes.html">Episodios</a>
+            <a href="Locations.html">Localizaciones</a>
+        </div>
+    </nav>
+    <h1>Personajes populares</h1>
+
+    <div id="result"></div>
+
+</body>
+<script>
+    let inputText = document.getElementById("inputText");
+    let inputSubmit = document.getElementById("inputSubmit");
+    let result = document.getElementById("result");
+    const characters = [];
+
+    fetch(`https://thesimpsonsapi.com/api/characters`)
+        .then(response => response.json())
+        .then(data => {
+
+            for (const info of data.results) {
+                console.log(info);
+
+                characters.push(info);
+
+                let id = info.id;
+                let name = info.name;
+                let age = "Edad: " + info.age;
+                let birthdate = "Cumpleaños: " + info.birthdate;
+                let gender = info.gender;
+                let occupation = info.occupation;
+                let phrases = `"` + info.phrases[0] + `"`;
+                let portrait_path = "https://cdn.thesimpsonsapi.com/200" + info.portrait_path; console.log("URL de imagen:", portrait_path);
+                let status = info.status;
+
+                let card = document.createElement("div");
+                card.className = "cards";
+
+                let box = document.createElement("div");
+                box.className = "box";
+
+                let titleName = document.createElement("h2");
+                titleName.textContent = name;
+
+                let ageP = document.createElement("p");
+                ageP.textContent = age;
+                ageP.className = "age";
+                ageP.style = "color: white";
+
+                let occupationP = document.createElement("p");
+                occupationP.textContent = occupation;
+
+                let phrasesP = document.createElement("p");
+                phrasesP.textContent = phrases;
+                phrasesP.className = "frase";
+
+                let portrait_pathP = document.createElement("img");
+                portrait_pathP.src = portrait_path;
+
+                let statusP = document.createElement("p");
+                statusP.textContent = status;
+                statusP.style = "color: white";
+
+                if (info.status === "Deceased") {
+                    statusP.className = "muerto";
+                } else if (info.status === "Alive") {
+                    statusP.className = "vivo";
+                } else {
+                    statusP.className = "desconocido";
+                }
+                card.appendChild(portrait_pathP);
+                card.appendChild(titleName);
+                card.appendChild(occupationP);
+                card.appendChild(box);
+                box.appendChild(ageP);
+                box.appendChild(statusP);
+                card.appendChild(phrasesP);
+                result.appendChild(card);
+
+                console.log("Array de personajes: " + characters);
+
+            }
+        })
+        .catch(error => console.error(error))
+</script>
+
+</html>
