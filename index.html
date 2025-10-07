@@ -40,6 +40,8 @@
         .nav-links {
             display: flex;
             gap: 20px;
+            transition: max-height 0.4s ease-in-out, opacity 0.3s ease;
+            overflow: hidden;
         }
 
         .nav-links a {
@@ -202,6 +204,20 @@
             margin-bottom: 10px;
         }
 
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 101;
+            transition: transform 0.3s ease;
+        }
+
+        .hamburger:hover {
+            transform: scale(1.1);
+        }
+
+
         @media (max-width: 1024px) {
             #result {
                 grid-template-columns: repeat(3, 1fr);
@@ -238,14 +254,42 @@
             }
         }
 
+
         @media (max-width: 400px) {
-            .nav-links {
-                display: flex;
-                flex-direction: column;
+            .hamburger {
+                display: block;
+                position: absolute;
+                top: 15px;
+                right: 20px;
             }
 
-            a:hover {
-                text-shadow: none;
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+                background-color: rgba(255, 255, 255, 0.3);
+                backdrop-filter: blur(10px);
+                border-top: 1px solid #aaa;
+                width: 100%;
+                max-height: 0;
+                opacity: 0;
+                padding: 0;
+            }
+
+            .nav-links.show {
+                max-height: 300px;
+                opacity: 1;
+                padding: 1rem 0;
+            }
+
+            .nav-links a {
+                font-size: 1rem;
+                padding: 0.7rem 1rem;
+                border-radius: 8px;
+                transition: background-color 0.3s ease;
+            }
+
+            .nav-links a:hover {
+                background-color: rgba(255, 255, 255, 0.2);
             }
         }
     </style>
@@ -256,6 +300,14 @@
         <div class="nav-logo">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/The_Simpsons_yellow_logo.svg/1280px-The_Simpsons_yellow_logo.svg.png"
                 alt="Logo" width="100">
+
+            <button class="hamburger" onclick="toggleMenu()" aria-label="Abrir menú">
+                <svg viewBox="0 0 100 80" width="30" height="30" fill="black">
+                    <rect width="100" height="10" rx="5"></rect>
+                    <rect y="30" width="100" height="10" rx="5"></rect>
+                    <rect y="60" width="100" height="10" rx="5"></rect>
+                </svg>
+            </button>
         </div>
         <div class="nav-links">
             <a href="characters.html">Personajes</a>
@@ -342,6 +394,11 @@
             }
         })
         .catch(error => console.error(error))
+
+    function toggleMenu() {
+        const navLinks = document.querySelector('.nav-links');
+        navLinks.classList.toggle('show');
+    }
 </script>
 
 </html>
